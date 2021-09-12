@@ -74,11 +74,25 @@ input:focus {
 }
 
 .task {
-  background-color: #ed7966;
+  border: 1px solid #ed7966;
+  background-color: #f3b0a4;
   color: #141850;
   font-weight: bold;
   padding: 15px 30px;
   width: 700px;
   border-radius: 5px;
   margin-bottom: 10px;
+}
+
+.delete-task {
+  float: right;
+  width: auto;
+}
+
+.fa-trash-alt {
+  color: #141850;
+}
+
+.fa-trash-alt:hover {
+  cursor: pointer;
 }

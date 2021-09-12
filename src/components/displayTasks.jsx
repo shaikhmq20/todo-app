@@ -6,13 +6,21 @@ class DisplayTasks extends React.Component {
       <div id="display-tasks">
         {this.props.tasks.map((task) => {
           return (
-            <div
-              className="task"
-              key={this.props.tasks.indexOf(task)}
-              id={this.props.tasks.indexOf(task)}
-            >
-              {task.value}
-            </div>
+            <React.Fragment>
+              <div
+                className="task"
+                key={this.props.tasks.indexOf(task)}
+                id={this.props.tasks.indexOf(task)}
+              >
+                {task.value}
+                <div className="delete-task">
+                  <i
+                    class="far fa-trash-alt"
+                    onClick={() => this.props.onDelete(task)}
+                  ></i>
+                </div>
+              </div>
+            </React.Fragment>
           );
         })}
       </div>

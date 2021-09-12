@@ -13,7 +13,11 @@ class GetTask extends React.Component {
     const value = document.getElementById("get-task").value;
     const tasks = this.state.tasks;
 
-    if (tasks.find((t) => t.value === value) === undefined || value !== "")
+    if (
+      tasks.find((t) => t.value.toLowerCase() === value.toLowerCase()) ===
+        undefined ||
+      value !== ""
+    )
       tasks.push({ value });
     else alert("The task is already assigned!");
     this.setState({ tasks });
@@ -25,6 +29,16 @@ class GetTask extends React.Component {
       this.addTask();
     }
   };
+
+  handleDelete = (task) => {
+    const tasks = this.state.tasks;
+    tasks.splice(tasks.indexOf(task), 1);
+    const localTasks = JSON.parse(localStorage.getItem("tasks"));
+    localTasks.splice(tasks.indexOf(task), 1);
+    this.setState({ tasks });
+    localStorage.setItem("tasks", JSON.stringify(localTasks));
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -40,7 +54,10 @@ class GetTask extends React.Component {
             +
           </button>
         </div>
-        <DisplayTasks tasks={this.state.tasks} />
+        <DisplayTasks
+          tasks={this.state.tasks}
+          onDelete={(task) => this.handleDelete(task)}
+        />
       </React.Fragment>
     );
   }
