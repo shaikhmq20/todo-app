@@ -13,7 +13,7 @@ class DisplayTasks extends React.Component {
                 id={this.props.tasks.indexOf(task)}
               >
                 {task.value}
-                <div className="delete-task">
+                <div className="delete-task" key={this.props.tasks.indexOf(task)}>
                   <i
                     class="far fa-trash-alt"
                     onClick={() => this.props.onDelete(task)}

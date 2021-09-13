@@ -1,5 +1,6 @@
 import React from "react";
 import DisplayTasks from "./displayTasks";
+import { getTheme } from "../themes";
 
 class GetTask extends React.Component {
   state = {
@@ -7,6 +8,9 @@ class GetTask extends React.Component {
       JSON.parse(localStorage.getItem("tasks")) === null
         ? []
         : JSON.parse(localStorage.getItem("tasks")),
+
+    themes: getTheme(),
+    isDisplayed: true,
   };
 
   addTask = () => {
@@ -35,9 +39,38 @@ class GetTask extends React.Component {
     localStorage.setItem("tasks", JSON.stringify(localTasks));
   };
 
+  handleTheme = () => {
+    const option = document.getElementById("options");
+    let isDisplayed = this.state.isDisplayed;
+    isDisplayed = !isDisplayed;
+    this.setState({ isDisplayed });
+    const property = this.optionDisplay();
+    option.style.display = property;
+  };
+
+  getCaretClass = () => {
+    return this.state.isDisplayed ? "fas fa-angle-down" : "fas fa-angle-up";
+  };
+
+  optionDisplay = () => {
+    return this.state.isDisplayed ? "block" : "none";
+  };
+
   render() {
+    const caretClass = this.getCaretClass();
+
     return (
       <React.Fragment>
+        <div id="themes">
+          <button id="select-theme" onClick={() => this.handleTheme()}>
+            Select a theme <i class={caretClass}></i>
+          </button>
+          <div id="options">
+            {this.state.themes.map((theme) => {
+              return <div className="theme">{theme.name}</div>;
+            })}
+          </div>
+        </div>
         <div id="task-input">
           <input
             type="text"
