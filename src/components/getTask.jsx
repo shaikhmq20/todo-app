@@ -11,6 +11,7 @@ class GetTask extends React.Component {
 
     themes: getTheme(),
     isDisplayed: true,
+    activeTheme: "Peach Blast",
   };
 
   addTask = () => {
@@ -48,12 +49,28 @@ class GetTask extends React.Component {
     option.style.display = property;
   };
 
+  handleThemeChange = (theme) => {
+    let activeTheme = this.state.activeTheme;
+    activeTheme = theme.name;
+    this.setState({ activeTheme });
+    const root = document.documentElement;
+    root.style.setProperty("--task-color", theme.taskColor);
+    root.style.setProperty("--bg-color", theme.bgColor);
+    root.style.setProperty("--text-color", theme.textColor);
+  };
+
   getCaretClass = () => {
     return this.state.isDisplayed ? "fas fa-angle-down" : "fas fa-angle-up";
   };
 
   optionDisplay = () => {
     return this.state.isDisplayed ? "block" : "none";
+  };
+
+  activeTheme = (theme) => {
+    return theme.name === this.state.activeTheme
+      ? "theme active-theme"
+      : "theme";
   };
 
   render() {
@@ -67,7 +84,15 @@ class GetTask extends React.Component {
           </button>
           <div id="options">
             {this.state.themes.map((theme) => {
-              return <div className="theme">{theme.name}</div>;
+              const activeClass = this.activeTheme(theme);
+              return (
+                <div
+                  className={activeClass}
+                  onClick={() => this.handleThemeChange(theme)}
+                >
+                  {theme.name}
+                </div>
+              );
             })}
           </div>
         </div>

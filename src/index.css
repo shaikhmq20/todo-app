@@ -6,6 +6,7 @@
 
 body {
   margin: 0;
+  background: var(--bg-color);
   font-family: "Poppins", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -147,7 +148,7 @@ input:focus {
 }
 
 .fa-trash-alt {
-  color: #141850;
+  color: var(--text-color);
 }
 
 .fa-trash-alt:hover {
