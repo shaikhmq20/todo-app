@@ -12,12 +12,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-@media screen and (max-width: 1083px) {
-  body {
-    background: var(--bg-color);
-  }
-}
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -32,6 +26,7 @@ code {
 }
 
 #themes {
+  font-weight: bold;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -86,11 +81,11 @@ code {
 }
 
 input {
-  color: #fff;
+  color:  var(--task-color);
   width: 50vw;
   font-size: 18px;
   padding: 10px 20px;
-  background-color: #141850;
+  background-color: var(--text-color);
   border: 1px solid #141850;
   border-radius: 25px;
 }
@@ -103,7 +98,7 @@ input::placeholder {
 
 input:focus {
   outline: none;
-  box-shadow: 0 0 10px #ed7966;
+  box-shadow: 0 0 10px var(--task-color);
 }
 
 #add {

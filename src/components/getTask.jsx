@@ -18,7 +18,13 @@ class GetTask extends React.Component {
     const value = document.getElementById("get-task").value;
     let tasks = this.state.tasks;
 
-    if (value !== "") tasks.push({ value });
+    if (
+      tasks.find((t) => t.value.toLowerCase() === value.toLowerCase()) ===
+        undefined ||
+      value === ""
+    )
+      tasks.push({ value });
+    else alert("The task is already assigned!");
 
     this.setState({ tasks });
     localStorage.setItem("tasks", JSON.stringify(this.state.tasks));

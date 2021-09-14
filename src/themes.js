@@ -17,14 +17,14 @@ const themes = [
     name: "Pink Blossom",
     taskColor: "#FF7BEE",
     bgColor: "#006764",
-    textColor: "#EE5D58",
+    textColor: "#000",
     inputColor: "",
   },
   {
     name: "Neon",
     taskColor: "#FFEC16",
     bgColor: "#0AFEFE",
-    textColor: "#EE5D58",
+    textColor: "#B20238",
     inputColor: "",
   },
 ];
