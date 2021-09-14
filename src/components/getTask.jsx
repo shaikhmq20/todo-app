@@ -56,7 +56,7 @@ class GetTask extends React.Component {
   };
 
   handleThemeChange = (theme) => {
-    let activeTheme = this.state.activeTheme;
+    let activeTheme;
     activeTheme = theme.name;
     this.setState({ activeTheme });
     const root = document.documentElement;

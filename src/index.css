@@ -104,11 +104,11 @@ input:focus {
 #add {
   margin-left: 15px;
   font-size: 18px;
-  color: #141850;
+  color: var(--text-color);
   border-radius: 50%;
   font-weight: bold;
-  background-color: #ed7966;
-  border: 1px solid #ed7966;
+  background-color: var(--task-color);
+  border: 1px solid var(--task-color);
   width: 40px;
   height: 40px;
 }
