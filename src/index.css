@@ -81,7 +81,7 @@ code {
 }
 
 input {
-  color:  var(--task-color);
+  color: var(--task-color);
   width: 50vw;
   font-size: 18px;
   padding: 10px 20px;
@@ -135,6 +135,12 @@ input:focus {
   width: 60vw;
   border-radius: 5px;
   margin-bottom: 10px;
+  transition: transform 0.4s, filter 0.25s;
+}
+.task:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+  filter: brightness(1.1);
 }
 
 .delete-task {
@@ -144,8 +150,10 @@ input:focus {
 
 .fa-trash-alt {
   color: var(--text-color);
+  transition: transform 0.15s;
 }
 
 .fa-trash-alt:hover {
   cursor: pointer;
+  transform: scale(1.2);
 }

@@ -4,6 +4,7 @@ import { getTheme } from "../themes";
 
 class GetTask extends React.Component {
   state = {
+    task: "",
     tasks:
       JSON.parse(localStorage.getItem("tasks")) === null
         ? []
@@ -11,19 +12,22 @@ class GetTask extends React.Component {
 
     themes: getTheme(),
     isDisplayed: true,
-    activeTheme: "Peach Blast",
+    activeTheme: getTheme()[0],
+  };
+
+  handleChange = ({ currentTarget: input }) => {
+    this.setState({ task: input.value });
   };
 
   addTask = () => {
-    const value = document.getElementById("get-task").value;
     let tasks = this.state.tasks;
-
+    const task = this.state.task;
     if (
-      tasks.find((t) => t.value.toLowerCase() === value.toLowerCase()) ===
+      tasks.find((t) => t.value.toLowerCase() === task.toLowerCase()) ===
         undefined ||
-      value === ""
+      task !== ""
     )
-      tasks.push({ value });
+      tasks.push({ value: task });
     else alert("The task is already assigned!");
 
     this.setState({ tasks });
@@ -56,8 +60,7 @@ class GetTask extends React.Component {
   };
 
   handleThemeChange = (theme) => {
-    let activeTheme;
-    activeTheme = theme.name;
+    let activeTheme = theme;
     this.setState({ activeTheme });
     const root = document.documentElement;
     root.style.setProperty("--task-color", theme.taskColor);
@@ -104,6 +107,8 @@ class GetTask extends React.Component {
         </div>
         <div id="task-input">
           <input
+            value={this.state.task}
+            onChange={this.handleChange}
             type="text"
             name="tasks"
             id="get-task"
