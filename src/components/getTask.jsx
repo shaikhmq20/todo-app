@@ -22,18 +22,16 @@ class GetTask extends React.Component {
   addTask = () => {
     let tasks = this.state.tasks;
     const task = this.state.task;
-    if (
-      tasks.find((t) => t.value.toLowerCase() === task.toLowerCase()) ===
-        undefined ||
-      task !== ""
-    )
-      tasks.push({ value: task });
-    else alert("The task is already assigned!");
+    const found = tasks.some((t) => t.value.toLowerCase() === task.toLowerCase());
+    if (task !== "" && !found)
+      tasks.push({value: task});
+    else
+      if (task !== "")
+        alert("Task is already assigned");
 
     this.setState({ tasks });
     localStorage.setItem("tasks", JSON.stringify(this.state.tasks));
     this.setState({ task: "" });
-    console.log(this.state.tasks);
   };
 
   handleKeyPress = (e) => {
