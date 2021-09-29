@@ -147,12 +147,18 @@ input:focus {
   width: auto;
 }
 
-.fa-trash-alt {
+.edit-task {
+  float:  right;
+  width: auto;
+  padding: 0 20px 0 0;
+}
+
+.icon {
   color: var(--text-color);
   transition: transform 0.15s;
 }
 
-.fa-trash-alt:hover {
+.icon:hover {
   cursor: pointer;
   transform: scale(1.2);
 }
