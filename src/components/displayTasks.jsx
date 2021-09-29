@@ -13,11 +13,14 @@ class DisplayTasks extends React.Component {
                 id={this.props.tasks.indexOf(task)}
               >
                 {task.value}
-                <div className="delete-task" key={this.props.tasks.indexOf(task)}>
+                <div className="delete-task icon">
                   <i
-                    class="far fa-trash-alt"
+                    className="far fa-trash-alt"
                     onClick={() => this.props.onDelete(task)}
                   ></i>
+                </div>
+                <div className="edit-task icon">
+                  <i className="far fa-edit"></i>
                 </div>
               </div>
             </React.Fragment>

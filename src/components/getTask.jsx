@@ -4,6 +4,7 @@ import { getTheme } from "../themes";
 
 class GetTask extends React.Component {
   state = {
+    task: "",
     tasks:
       JSON.parse(localStorage.getItem("tasks")) === null
         ? []
@@ -11,24 +12,26 @@ class GetTask extends React.Component {
 
     themes: getTheme(),
     isDisplayed: true,
-    activeTheme: "Peach Blast",
+    activeTheme: getTheme()[0],
+  };
+
+  handleChange = ({ currentTarget: input }) => {
+    this.setState({ task: input.value });
   };
 
   addTask = () => {
-    const value = document.getElementById("get-task").value;
     let tasks = this.state.tasks;
-
-    if (
-      tasks.find((t) => t.value.toLowerCase() === value.toLowerCase()) ===
-        undefined ||
-      value === ""
-    )
-      tasks.push({ value });
-    else alert("The task is already assigned!");
+    const task = this.state.task;
+    const found = tasks.some((t) => t.value.toLowerCase() === task.toLowerCase());
+    if (task !== "" && !found)
+      tasks.push({value: task});
+    else
+      if (task !== "")
+        alert("Task is already assigned");
 
     this.setState({ tasks });
     localStorage.setItem("tasks", JSON.stringify(this.state.tasks));
-    document.getElementById("get-task").value = "";
+    this.setState({ task: "" });
   };
 
   handleKeyPress = (e) => {
@@ -56,8 +59,7 @@ class GetTask extends React.Component {
   };
 
   handleThemeChange = (theme) => {
-    let activeTheme;
-    activeTheme = theme.name;
+    let activeTheme = theme;
     this.setState({ activeTheme });
     const root = document.documentElement;
     root.style.setProperty("--task-color", theme.taskColor);
@@ -104,10 +106,12 @@ class GetTask extends React.Component {
         </div>
         <div id="task-input">
           <input
+            value={this.state.task}
+            onChange={this.handleChange}
             type="text"
             name="tasks"
             id="get-task"
-            placeHolder="Enter task"
+            placeholder="Enter task..."
             onKeyPress={this.handleKeyPress}
           />
           <button type="submit" id="add" onClick={() => this.addTask()}>
