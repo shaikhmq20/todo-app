@@ -32,7 +32,8 @@ class GetTask extends React.Component {
 
     this.setState({ tasks });
     localStorage.setItem("tasks", JSON.stringify(this.state.tasks));
-    document.getElementById("get-task").value = "";
+    this.setState({ task: "" });
+    console.log(this.state.tasks);
   };
 
   handleKeyPress = (e) => {
@@ -112,7 +113,7 @@ class GetTask extends React.Component {
             type="text"
             name="tasks"
             id="get-task"
-            placeHolder="Enter task"
+            placeholder="Enter task..."
             onKeyPress={this.handleKeyPress}
           />
           <button type="submit" id="add" onClick={() => this.addTask()}>

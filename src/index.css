@@ -91,8 +91,7 @@ input {
 }
 
 input::placeholder {
-  color: #fff;
-  font-style: italic;
+  color: #f9f9f9;
   font-weight: 100;
 }
 
@@ -138,7 +137,7 @@ input:focus {
   transition: transform 0.4s, filter 0.25s;
 }
 .task:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
   cursor: pointer;
   filter: brightness(1.1);
 }
