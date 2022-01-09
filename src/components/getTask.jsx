@@ -1,36 +1,53 @@
 import React from "react";
 import DisplayTasks from "./displayTasks";
 import { getTheme } from "../themes";
+import axios from "axios";
 
 class GetTask extends React.Component {
   state = {
     task: "",
-    tasks:
-      JSON.parse(localStorage.getItem("tasks")) === null
-        ? []
-        : JSON.parse(localStorage.getItem("tasks")),
-
+    todos: [],
     themes: getTheme(),
     isDisplayed: true,
     activeTheme: getTheme()[0],
+  };
+
+  componentDidMount() {
+    this.getTask();
+  }
+
+  getTask = async () => {
+    const todos = [];
+    await axios
+      .get("http://localhost:5000/tasks/")
+      .then((res) => {
+        if (res.data.length > 0) {
+          res.data.forEach((t) => {
+            todos.push(t);
+          });
+          console.log(todos);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    this.setState({ todos });
   };
 
   handleChange = ({ currentTarget: input }) => {
     this.setState({ task: input.value });
   };
 
-  addTask = () => {
-    let tasks = this.state.tasks;
-    const task = this.state.task;
-    const found = tasks.some((t) => t.value.toLowerCase() === task.toLowerCase());
-    if (task !== "" && !found)
-      tasks.push({value: task});
-    else
-      if (task !== "")
-        alert("Task is already assigned");
-
-    this.setState({ tasks });
-    localStorage.setItem("tasks", JSON.stringify(this.state.tasks));
+  addTask = async () => {
+    await axios
+      .post("http://localhost:5000/tasks/addTask/", { task: this.state.task })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    this.getTask();
     this.setState({ task: "" });
   };
 
@@ -41,12 +58,13 @@ class GetTask extends React.Component {
   };
 
   handleDelete = (task) => {
-    const tasks = this.state.tasks;
-    tasks.splice(tasks.indexOf(task), 1);
-    const localTasks = JSON.parse(localStorage.getItem("tasks"));
-    localTasks.splice(tasks.indexOf(task), 1);
-    this.setState({ tasks });
-    localStorage.setItem("tasks", JSON.stringify(localTasks));
+    const todos = this.state.todos;
+    todos.splice(todos.indexOf(task), 1);
+    axios
+      .delete("http://localhost:5000/tasks/" + task._id)
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
+    this.setState({ todos });
   };
 
   handleTheme = () => {
@@ -119,7 +137,8 @@ class GetTask extends React.Component {
           </button>
         </div>
         <DisplayTasks
-          tasks={this.state.tasks}
+          task={this.state.task}
+          todos={this.state.todos}
           onDelete={(task) => this.handleDelete(task)}
         />
       </React.Fragment>

@@ -4,19 +4,19 @@ class DisplayTasks extends React.Component {
   render() {
     return (
       <div id="display-tasks">
-        {this.props.tasks.map((task) => {
+        {this.props.todos.map((todo) => {
           return (
             <React.Fragment>
               <div
                 className="task"
-                key={this.props.tasks.indexOf(task)}
-                id={this.props.tasks.indexOf(task)}
+                key={this.props.todos.indexOf(todo)}
+                id={this.props.todos.indexOf(todo)}
               >
-                {task.value}
+                {todo.task}
                 <div className="delete-task icon">
                   <i
                     className="far fa-trash-alt"
-                    onClick={() => this.props.onDelete(task)}
+                    onClick={() => this.props.onDelete(todo)}
                   ></i>
                 </div>
                 <div className="edit-task icon">
