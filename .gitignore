@@ -29,3 +29,6 @@ yarn-error.log*
 .idea/todo.iml
 .idea/vcs.xml
 .idea/inspectionProfiles/Project_Default.xml
+
+#.env file
+/backend/.env
